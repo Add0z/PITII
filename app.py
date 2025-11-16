@@ -46,9 +46,12 @@ def show_login_view():
                 if st.form_submit_button("Login", use_container_width=True):
                     user = db.get_user_by_email(email)
                     if user and user.password == db.hash_password(password):
-                        st.session_state['logged_in'] = True
-                        st.session_state['user_info'] = user
-                        st.rerun()
+                        if user.status == 'active':
+                            st.session_state['logged_in'] = True
+                            st.session_state['user_info'] = user
+                            st.rerun()
+                        else:
+                            st.error("This account is inactive or blocked.")
                     else:
                         st.error("Invalid email or password.")
 
@@ -63,7 +66,7 @@ def show_login_view():
                     if db.get_user_by_email(email):
                         st.error("This email is already registered.")
                     else:
-                        new_user = User(name=name, email=email, password=password)
+                        new_user = User(name=name, email=email, password=password, status='active')
                         db.add_user(new_user)
                         st.success("Account created successfully! Please log in.")
 

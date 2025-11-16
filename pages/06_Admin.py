@@ -25,10 +25,18 @@ def show_product_management():
             price = st.number_input("Price", min_value=0.0, format="%.2f")
             stock = st.number_input("Stock", min_value=0)
             flavor = st.text_input("Flavor")
-            image_url = st.text_input("Image URL", placeholder="e.g., images/my_cupcake.jpg.png")
+            image_file = st.file_uploader("Upload Image", type=['png', 'jpg', 'jpeg'])
             
             submitted = st.form_submit_button("Add Product")
             if submitted:
+                image_url = ""
+                if image_file is not None:
+                    # Save the uploaded file and get its path
+                    image_path = os.path.join("images", image_file.name)
+                    with open(image_path, "wb") as f:
+                        f.write(image_file.getbuffer())
+                    image_url = image_path
+                
                 new_product = Product(name=name, description=description, price=price, stock=stock, flavor=flavor, image_url=image_url)
                 db.add_product(new_product)
                 st.success("Product added successfully!")
@@ -44,9 +52,19 @@ def show_product_management():
                 price = st.number_input("Price", value=product.price, key=f"price_{product.id}", format="%.2f")
                 stock = st.number_input("Stock", value=product.stock, key=f"stock_{product.id}")
                 flavor = st.text_input("Flavor", value=product.flavor, key=f"flavor_{product.id}")
-                image_url = st.text_input("Image URL", value=product.image_url, key=f"image_url_{product.id}")
+                
+                new_image_file = st.file_uploader("Replace Image", type=['png', 'jpg', 'jpeg'], key=f"img_up_{product.id}")
                 
                 if st.form_submit_button("Update"):
+                    image_url = product.image_url
+                    if new_image_file is not None:
+                        # Use a unique name to avoid cache issues
+                        unique_filename = f"{product.id}_{new_image_file.name}"
+                        image_path = os.path.join("images", unique_filename)
+                        with open(image_path, "wb") as f:
+                            f.write(new_image_file.getbuffer())
+                        image_url = image_path
+
                     updated_product = Product(id=product.id, name=name, description=description, price=price, stock=stock, flavor=flavor, image_url=image_url)
                     db.update_product(updated_product)
                     st.success("Product updated!")
@@ -79,8 +97,14 @@ def show_order_management():
                 "Update Status", status_options, index=current_status_index, key=f"status_{order.id}"
             )
             if st.button("Update Status", key=f"update_status_{order.id}"):
-                db.update_order_status(order.id, new_status)
-                st.success("Order status updated!")
+                if new_status == "Cancelled" and order.status != "Cancelled":
+                    if db.cancel_order(order.id):
+                        st.success("Order cancelled and stock restored.")
+                    else:
+                        st.error("Could not cancel this order.")
+                else:
+                    db.update_order_status(order.id, new_status)
+                    st.success("Order status updated!")
                 st.rerun()
 
 def show_user_management():
@@ -88,12 +112,23 @@ def show_user_management():
     users = db.get_all_users()
 
     for user in users:
-        st.write(f"**{user.name}** ({user.email}) - ID: {user.id}")
-        is_admin = st.checkbox("Is Admin?", value=user.is_admin, key=f"admin_{user.id}")
-        if st.button("Update Role", key=f"update_role_{user.id}"):
-            db.update_user_admin_status(user.id, is_admin)
-            st.success(f"User {user.name}'s role updated.")
-            st.rerun()
+        col1, col2, col3 = st.columns([2,1,1])
+        with col1:
+            st.write(f"**{user.name}** ({user.email})")
+        with col2:
+            is_admin = st.checkbox("Is Admin?", value=user.is_admin, key=f"admin_{user.id}")
+            if st.button("Update Role", key=f"update_role_{user.id}"):
+                db.update_user_admin_status(user.id, is_admin)
+                st.success(f"User {user.name}'s role updated.")
+                st.rerun()
+        with col3:
+            status_options = ["active", "blocked", "inactive"]
+            current_status_index = status_options.index(user.status) if user.status in status_options else 0
+            new_status = st.selectbox("Status", status_options, index=current_status_index, key=f"status_{user.id}")
+            if st.button("Update Status", key=f"update_status_{user.id}"):
+                db.update_user_status(user.id, new_status)
+                st.success(f"User {user.name}'s status updated.")
+                st.rerun()
         st.markdown("---")
 
 def show_stock_management():
@@ -130,8 +165,11 @@ def show_admin_page():
     """The main container for all admin-related functionalities."""
     logo_bytes = get_image_bytes("images/logoFull.jpg")
     if logo_bytes:
-        st.sidebar.image(logo_bytes, use_container_width=True)
-        
+        with st.sidebar.container():
+            if st.button("Go to Shop", use_container_width=True):
+                st.switch_page("pages/01_Shop.py")
+            st.image(logo_bytes, use_container_width=True)
+
     st.sidebar.write(f"Welcome, {st.session_state['user_info'].name}!")
     if st.sidebar.button("Logout"):
         for key in list(st.session_state.keys()):

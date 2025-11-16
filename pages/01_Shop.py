@@ -18,6 +18,11 @@ def get_image_bytes(image_path):
 
 def add_to_cart(product, quantity):
     """Adds a product to the shopping cart in the session state."""
+    # Backend validation for quantity
+    if not isinstance(quantity, int) or quantity <= 0:
+        st.error("Quantity must be a positive number.")
+        return
+
     cart_item = {'product_id': product.id, 'quantity': quantity}
     
     for item in st.session_state['cart']:
@@ -68,7 +73,7 @@ def show_shop_page():
                 
                 st.subheader(product.name)
                 st.write(f"**Price:** ${product.price:.2f}")
-                quantity = st.number_input("Quantity", min_value=1, max_value=product.stock, value=1, key=f"qty_{product.id}")
+                quantity = st.number_input("Quantity", min_value=1, max_value=product.stock, value=1, step=1, key=f"qty_{product.id}")
                 if st.button("Add to Cart", key=f"add_{product.id}"):
                     add_to_cart(product, quantity)
                     st.success(f"Added {quantity} of {product.name} to cart!")

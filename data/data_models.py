@@ -8,6 +8,7 @@ class User:
     email: str = ""
     password: str = ""
     is_admin: bool = False
+    status: str = "active"  # Adicionado o campo status
 
 @dataclass
 class Product:
