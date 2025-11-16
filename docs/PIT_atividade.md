@@ -6,6 +6,7 @@
 **PIT I \- [https://github.com/Add0z/PITII/blob/main/docs/Relat%C3%B3rio%20de%20Entrega%20de%20Atividades%20Extensionistas.pdf](https://github.com/Add0z/PITII/blob/main/docs/Relat%C3%B3rio%20de%20Entrega%20de%20Atividades%20Extensionistas.pdf)**
 
 **PIT II \-**   
+
 ***Link*** **do repositório:**   
 [**https://github.com/Add0z/PITII**](https://github.com/Add0z/PITII)
 
@@ -24,7 +25,6 @@
 | ***Link*** **do vídeo narrado (no mínimo 5 min)**                                      | readme: [https://github.com/Add0z/PITII?tab=readme-ov-file](https://github.com/Add0z/PITII?tab=readme-ov-file) <br/>link: [https://github.com/Add0z/PITII/blob/main/docs/PITII-cupcakeShop-2x.mp4](https://github.com/Add0z/PITII/blob/main/docs/PITII-cupcakeShop-2x.mp4)                                                                                       |
 
 **Testes da Solução**  
-Escolha 5 colegas para testar sua aplicação e preencha a tabela a seguir com as informações obtidas:
 
 | Nome:Aelcio Jozzia Putzel | Data do teste: 21/10/2025 |
 | :---- | :---- |
