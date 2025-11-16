@@ -1,0 +1,44 @@
+### venv template
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+.venv_pitii
+.db
+pip-selfcheck.json
+
+### VirtualEnv template
+# Virtualenv
+# http://iamzed.com/2009/05/07/a-primer-on-virtualenv/
+.Python
+[Bb]in
+[Ii]nclude
+[Ll]ib
+[Ll]ib64
+[Ll]ocal
+[Ss]cripts
+pyvenv.cfg
+.venv
+.venv_pitii
+pip-selfcheck.json
+
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+/venv_pitii/share/jupyter/nbextensions/pydeck/extensionRequires.js
+/venv_pitii/share/jupyter/nbextensions/pydeck/index.js
+/venv_pitii/share/jupyter/nbextensions/pydeck/index.js.map
+/venv_pitii/etc/jupyter/nbconfig/notebook.d/pydeck.json
+!/data/cupcake_store.db
