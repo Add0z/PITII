@@ -1,5 +1,3 @@
-Olá, estudante.  
-A seguir, você dará continuidade ao desenvolvimento da sua solução através dos campos específicos para a resolução dos 3 desafios propostos, lembrando que eles se complementam.
 
 **Nome:** André da Silveira Pereria  
 **RGM:** 32235852
@@ -12,17 +10,18 @@ A seguir, você dará continuidade ao desenvolvimento da sua solução através 
 [**https://github.com/Add0z/PITII**](https://github.com/Add0z/PITII)
 
 **Codificação:**  
-Na Tabela a seguir insira as informações referentes ao desenvolvimento do código do *front-end* e *back-end*.
 
-| Linguagem do *Back-end* | Python3 |
-| :---- | :---- |
-| **Banco de Dados** | **SQLite** |
-| **Hospedagem** | **Streamlit.app** |
-| **Plataforma** | **web** |
-| **Modo de Codificação** | ( x) Tradicional ( ) *Low-code* ( ) *No-code* |
-| ***Link* do repositório no [GitHub](https://github.com/login) com os códigos abertos** | [https://github.com/Add0z/PITII](https://github.com/Add0z/PITII) |
-| ***Link*** **da solução emfuncionamento** | [https://cupcakestore-pitii.streamlit.app/](https://cupcakestore-pitii.streamlit.app/) |
-| ***Link*** **do vídeo narrado (no mínimo 5 min)**  |  |
+| Codificação                                                                            | Descrição                                                                              |
+|:---------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------|
+| Linguagem do *Back-end*                                                                | Python3                                                                                |
+| Linguagem do *Front-end*                                                               | Streamlit                                                                              |
+| **Banco de Dados**                                                                     | **SQLite**                                                                             |
+| **Hospedagem**                                                                         | **Streamlit.app**                                                                      |
+| **Plataforma**                                                                         | **web**                                                                                |
+| **Modo de Codificação**                                                                | ( x) Tradicional ( ) *Low-code* ( ) *No-code*                                          |
+| ***Link* do repositório no [GitHub](https://github.com/login) com os códigos abertos** | [https://github.com/Add0z/PITII](https://github.com/Add0z/PITII)                       |
+| ***Link*** **da solução emfuncionamento**                                             | [https://cupcakestore-pitii.streamlit.app/](https://cupcakestore-pitii.streamlit.app/) |
+| ***Link*** **do vídeo narrado (no mínimo 5 min)**                                      | readme: [https://github.com/Add0z/PITII?tab=readme-ov-file](https://github.com/Add0z/PITII?tab=readme-ov-file) <br/>link: [https://github.com/Add0z/PITII/blob/main/docs/PITII-cupcakeShop-2x.mp4](https://github.com/Add0z/PITII/blob/main/docs/PITII-cupcakeShop-2x.mp4)                                                                                       |
 
 **Testes da Solução**  
 Escolha 5 colegas para testar sua aplicação e preencha a tabela a seguir com as informações obtidas:
@@ -71,13 +70,24 @@ A seguir, estão detalhados os erros encontrados durante os testes e as correç�
 | **Mariana Santos** | Fluxo de Compra (Cancelamento) | Erro ao tentar cancelar um pedido recém-finalizado com pagamento via PIX, exibindo a mensagem: "Erro ao remover item: registro indisponível." | Investigar a lógica de cancelamento de pedidos com pagamento PIX. O erro "registro indisponível" sugere que o pedido ou itens associados não estão sendo localizados corretamente para exclusão/atualização de *status* ou que há uma restrição de tempo/status para cancelamento que não está sendo verificada corretamente. |
 | **Felipe Rocha** | Interface de Usuário (Carrinho) | A validação do campo de quantidade no carrinho não impede a inserção de caracteres não numéricos. | Implementar validação no *front-end* e *back-end* para garantir que o campo de quantidade aceite apenas caracteres numéricos inteiros e positivos. |
 
+**Correções Aplicadas**
+
+1.Segurança (Relato de Ricardo Costa): A lógica de autenticação agora verifica o status do usuário, impedindo o login de contas inativas ou bloqueadas. A interface de administração foi atualizada para permitir o gerenciamento do status dos usuários.
+
+2.Navegação (Relato de Laura Pereira): O logotipo no painel de administração agora redireciona corretamente para a página principal da loja.
+
+3.Gerenciamento de Itens (Relato de Aelcio Putzel): A funcionalidade de edição de produtos foi aprimorada para usar um st.file_uploader e salvar as imagens com nomes únicos, resolvendo o problema de substituição de arquivos.
+
+4.Validação de Dados (Relato de Felipe Rocha): Foi adicionada uma validação no back-end para garantir que a quantidade de itens adicionados ao carrinho seja sempre um número inteiro e positivo.
+
+5.Cancelamento de Pedidos (Relato de Mariana Santos): A lógica de cancelamento de pedidos foi refatorada para ser mais robusta, verificando o status do pedido e garantindo a restauração correta do estoque, o que deve resolver o erro "registro indisponível".
+
 **Funcionalidades Não Testadas / Não Implementadas**
 
 A funcionalidade de **opções de retirada** foi identificada por Mariana Santos como não testada ou não implementada no escopo dos testes realizados, o que exige atenção para o desenvolvimento ou inclusão em testes futuros.
 
 **Vídeo da Solução atualizada**  
-Após levantar os *feedbacks* e executar as correções necessárias e pertinentes, grave um vídeo de até 5 minutos apresentando as modificações realizadas no sistema.
 
-| *Link* para o vídeo  | readme: [https://github.com/Add0z/PITII?tab=readme-ov-file](https://github.com/Add0z/PITII?tab=readme-ov-file) link: [https://github.com/Add0z/PITII/blob/main/docs/PITII-cupcakeShop-2x.mp4](https://github.com/Add0z/PITII/blob/main/docs/PITII-cupcakeShop-2x.mp4)  |
+| *Link* para o vídeo  | readme: [https://github.com/Add0z/PITII?tab=readme-ov-file](https://github.com/Add0z/PITII?tab=readme-ov-file) link: [https://github.com/Add0z/PITII/blob/main/docs/PITII-pos-fix-audio.mp4](https://github.com/user-attachments/assets/b17505d8-34c5-4f77-ab10-24c746c334d1)  |
 | :---- | :---- |
 
